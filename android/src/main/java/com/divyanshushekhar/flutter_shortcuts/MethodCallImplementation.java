@@ -83,6 +83,7 @@ public class MethodCallImplementation implements MethodChannel.MethodCallHandler
                 break;
             case "pushShortcutItem":
                 pushShortcutItem(call);
+                result.success(null);
                 break;
             case "pushShortcutItems":
                 pushShortcutItems(call);
@@ -165,7 +166,7 @@ public class MethodCallImplementation implements MethodChannel.MethodCallHandler
         List<ShortcutInfoCompat> shortcuts;
         try {
             shortcuts = shortcutInfoCompatList(args);
-            ShortcutManagerCompat.addDynamicShortcuts(context,shortcuts);
+            ShortcutManagerCompat.pushDynamicShortcut(context,shortcuts.get(0));
             debugPrint("Shortcut pushed");
         } catch (Exception e) {
             Log.e(TAG,e.toString());
